@@ -1,3 +1,4 @@
+package my.android.jetpack_compose_canvas.revealColorEffect
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
@@ -13,10 +14,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.RadialGradientShader
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.imageResource
@@ -24,13 +24,12 @@ import androidx.compose.ui.unit.IntSize
 import my.android.jetpack_compose_canvas.R
 
 @Composable
-fun FlashLightEffect(
+fun RevealColorEffect(
     @DrawableRes imageRes: Int,
-    flashLightRadius: Float = 350f,
+    revealRadius: Float = 250f,
 ) {
     val image = ImageBitmap.imageResource(id = imageRes)
     var touchPosition by remember { mutableStateOf(Offset.Zero) }
-    val darkOverlay = Color.Black.copy(alpha = .9f)
 
     Canvas(
         modifier = Modifier
@@ -39,8 +38,7 @@ fun FlashLightEffect(
                 detectDragGestures { change, _ ->
                     touchPosition = change.position
                 }
-            }
-                .onSizeChanged {
+            }.onSizeChanged {
                 touchPosition = Offset(it.width / 2f, it.height / 2f)
             }
     ) {
@@ -56,29 +54,23 @@ fun FlashLightEffect(
             paint = Paint()
         )
 
-        drawRect(color = darkOverlay)
+        drawImage(
+            image = image,
+            dstSize = imageSize,
+            colorFilter = ColorFilter.tint(color = Color.Black, blendMode = BlendMode.Saturation)
+        )
 
-        drawIntoCanvas { canvas ->
-            val paint = Paint().apply {
-                shader = RadialGradientShader(
-                    colors = listOf(Color.White, Color.Transparent),
-                    center = touchPosition,
-                    radius = flashLightRadius
-                )
-                blendMode = BlendMode.DstOut
-            }
-
-            canvas.drawCircle(
-                center = touchPosition,
-                radius = flashLightRadius,
-                paint = paint
-            )
-        }
+        drawCircle(
+            color = Color.Transparent,
+            radius = revealRadius,
+            center = touchPosition,
+            blendMode = BlendMode.Clear
+        )
         drawContext.canvas.restore()
     }
 }
 
 @Composable
-fun FlashLightScreen() {
-    FlashLightEffect(imageRes = R.drawable.anime_street)
+fun RevealColorScreen() {
+    RevealColorEffect(imageRes = R.drawable.anime_street)
 }

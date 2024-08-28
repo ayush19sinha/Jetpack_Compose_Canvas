@@ -25,7 +25,7 @@ import my.android.jetpack_compose_canvas.R
 @Composable
 fun GrayScaleEffect(
     @DrawableRes imageRes: Int,
-    grayRadius: Float = 450f,
+    grayRadius: Float = 250f,
 ) {
     val image = ImageBitmap.imageResource(id = imageRes)
     var touchPosition by remember { mutableStateOf(Offset.Zero) }
