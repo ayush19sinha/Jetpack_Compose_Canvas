@@ -20,6 +20,13 @@ In this effect, the image is initially displayed in color except for a circular 
 - **Color to Grayscale:** The image starts in color, with a circular area that displays a grayscale version. The grayscale area moves with your touch.
 - **Drag Interaction:** The grayed-out circle follows your finger as you drag it across the screen.
 
+### 3. Color Reveal Effect
+This effect displays an image in grayscale, with a circular area that reveals the original colors when touched.
+
+**Features:**
+- **Color Reveal:** A circular area follows your touch, clearing the grayscale effect and revealing the original image colors underneath.
+- **Drag Interaction:** The color reveal circle moves as you drag your finger across the screen.
+
 ## Getting Started
 
 To explore the effects, clone the repository and open it in Android Studio:
