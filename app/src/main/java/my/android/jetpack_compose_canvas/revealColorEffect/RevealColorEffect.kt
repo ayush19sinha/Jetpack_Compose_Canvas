@@ -2,7 +2,7 @@ package my.android.jetpack_compose_canvas.revealColorEffect
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,17 +26,19 @@ import my.android.jetpack_compose_canvas.R
 @Composable
 fun RevealColorEffect(
     @DrawableRes imageRes: Int,
-    revealRadius: Float = 250f,
+    initialRevealRadius: Float = 200f,
 ) {
     val image = ImageBitmap.imageResource(id = imageRes)
     var touchPosition by remember { mutableStateOf(Offset.Zero) }
+    var revealRadius by remember { mutableStateOf(initialRevealRadius) }
 
     Canvas(
         modifier = Modifier
             .fillMaxSize()
             .pointerInput(Unit) {
-                detectDragGestures { change, _ ->
-                    touchPosition = change.position
+                detectTransformGestures { centroid, pan, gestureZoom, gestureRotate ->
+                    touchPosition += pan
+                    revealRadius = (revealRadius * gestureZoom)
                 }
             }.onSizeChanged {
                 touchPosition = Offset(it.width / 2f, it.height / 2f)
