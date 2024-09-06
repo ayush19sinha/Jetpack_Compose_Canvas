@@ -45,6 +45,19 @@ This effect displays an image in grayscale, with a circular area that reveals th
 https://github.com/user-attachments/assets/d606c71d-b5cb-4e5c-97cf-dd60139c3391
 
 
+### 4. YinYang Theme Switch 
+This feature introduces an interactive YinYang switcher that allows users to toggle between light and dark themes with a smooth animation.
+
+**Features:**
+- **Interactive Toggle:** Switch between light and dark themes by tapping on the YinYang icon.
+- **Smooth Animation:** The YinYang icon rotates and animates seamlessly, providing a delightful user experience.
+- **Dynamic Theme Application:** Themes change instantly, adapting the UI colors based on the current mode.
+
+
+
+https://github.com/user-attachments/assets/8df65689-95a7-4da5-9f85-5f381f051907
+
+
 
 ## Getting Started
 
