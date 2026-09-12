@@ -4,6 +4,7 @@ import ThemeSwitcher
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideIn
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,15 +21,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import my.android.jetpack_compose_canvas.ui.theme.Background
 import my.android.jetpack_compose_canvas.yingYangThemeSwitcher.viewModel.ThemeViewModel
 
 @Composable
-fun Home(themeViewModel: ThemeViewModel, modifier: Modifier = Modifier) {
+fun ThemeSwitcherScreen(themeViewModel: ThemeViewModel, modifier: Modifier = Modifier) {
     val isDarkTheme by themeViewModel.isDarkTheme.collectAsState(initial = false)
     var textVisibility by remember { mutableStateOf(false) }
 
@@ -37,14 +38,18 @@ fun Home(themeViewModel: ThemeViewModel, modifier: Modifier = Modifier) {
         textVisibility = true
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(if (isDarkTheme) Background else Color.White)
+    ) {
         AnimatedTitleText(
             isDarkTheme = isDarkTheme,
             textVisibility = textVisibility
         )
 
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             ThemeSwitcher(
@@ -82,11 +87,4 @@ private fun AnimatedTitleText(isDarkTheme: Boolean, textVisibility: Boolean) {
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun HomePreview() {
-    val themeViewModel = ThemeViewModel()
-    Home(themeViewModel = themeViewModel)
 }
