@@ -26,6 +26,7 @@ fun HomeScreen(
     onFlashLightClick: () -> Unit,
     onRevealColorClick: () -> Unit,
     onGrayScaleClick: () -> Unit,
+    onLoadingTextClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -54,6 +55,7 @@ fun HomeScreen(
                 color = Color.White.copy(alpha = 0.7f),
                 modifier = Modifier.padding(bottom = 16.dp)
             )
+            AnimationButton("Loading Text", onLoadingTextClick)
             AnimationButton("Theme Switcher", onThemeSwitcherClick)
             AnimationButton("Flashlight", onFlashLightClick)
             AnimationButton("Reveal Color", onRevealColorClick)

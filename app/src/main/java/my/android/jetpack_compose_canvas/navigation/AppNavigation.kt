@@ -25,7 +25,8 @@ fun AppNavigation(themeViewModel: ThemeViewModel) {
                 onThemeSwitcherClick = { navController.navigate(ThemeSwitcherNav) },
                 onFlashLightClick = { navController.navigate(FlashLightNav) },
                 onRevealColorClick = { navController.navigate(RevealColorNav) },
-                onGrayScaleClick = { navController.navigate(GrayScaleNav) }
+                onGrayScaleClick = { navController.navigate(GrayScaleNav) },
+                onLoadingTextClick = { navController.navigate(LoadingTextNav) }
             )
         }
         composable<ThemeSwitcherNav> {
@@ -39,6 +40,9 @@ fun AppNavigation(themeViewModel: ThemeViewModel) {
         }
         composable<GrayScaleNav> {
             GrayScaleScreen()
+        }
+        composable<LoadingTextNav> {
+            LoadingTextScreen()
         }
     }
 }

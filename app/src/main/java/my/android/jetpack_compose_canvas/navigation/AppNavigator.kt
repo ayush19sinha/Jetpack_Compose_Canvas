@@ -16,3 +16,6 @@ data object RevealColorNav
 
 @Serializable
 data object GrayScaleNav
+
+@Serializable
+data object LoadingTextNav
